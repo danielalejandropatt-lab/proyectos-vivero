@@ -456,7 +456,7 @@
         // Actualiza enlace de botón del menú
         document.getElementById("btn-wa-header").href = "https://wa.me/" + miTelefonoWhatsApp;
 
-        // Escucha el envío del formulario
+       // Escucha el envío del formulario
         document.getElementById("cotizacionForm").addEventListener("submit", function(event) {
             event.preventDefault(); // Evita recargar la página
 
@@ -466,17 +466,17 @@
             const telefono = document.getElementById("clienteTel").value;
             const servicio = document.getElementById("clienteServicio").value;
 
-            // Formato del mensaje para WhatsApp
-            const mensaje = `¡Hola! Vengo de la landing page y me gustaría solicitar una cotización B2B.%0A%0A` +
-                            `📌 *Nombre:* ${encodeURIComponent(nombre)}%0A` +
-                            `🏢 *Empresa/Proyecto:* ${encodeURIComponent(empresa)}%0A` +
-                            `📞 *Teléfono:* ${encodeURIComponent(telefono)}%0A` +
-                            `🌱 *Requerimiento:* ${encodeURIComponent(servicio)}`;
+            // Formato de texto limpio sin caracteres especiales que se rompan en PC
+            const textoMensaje = "Hola, solicito cotizacion B2B desde la landing page:" + "\n" +
+                                 "- Nombre: " + nombre + "\n" +
+                                 "- Empresa: " + empresa + "\n" +
+                                 "- Teléfono: " + telefono + "\n" +
+                                 "- Requerimiento: " + servicio;
 
-            // Enlace final de WhatsApp
-            const urlWhatsApp = `https://wa.me/${miTelefonoWhatsApp}?text=${mensaje}`;
+            // Enlace optimizado para abrir directo la app de WhatsApp
+            const urlWhatsApp = "https://api.whatsapp.com/send?phone=" + miTelefonoWhatsApp + "&text=" + encodeURIComponent(textoMensaje);
 
-            // Abrir WhatsApp en una nueva pestaña
+            // Abrir WhatsApp
             window.open(urlWhatsApp, "_blank");
         });
     </script>
