@@ -61,7 +61,6 @@
             font-size: 0.9rem;
         }
 
-        /* Hero Banner con retoque de contraste en imagen de fondo */
         .hero {
             background: linear-gradient(rgba(14, 35, 16, 0.82), rgba(14, 35, 16, 0.82)), url('vivero-principal.jpg');
             background-size: cover;
@@ -221,7 +220,6 @@
             background-color: var(--verde-acento);
         }
 
-        /* Galería con retocado visual en CSS (Mejora de brillo, contraste y vivacidad) */
         .gallery-section {
             padding: 50px 5%;
             background-color: #ffffff;
@@ -262,7 +260,6 @@
             height: 250px;
             object-fit: cover;
             display: block;
-            /* Filtros de mejora de imagen: +10% brillo, +15% contraste, +20% saturación verde */
             filter: brightness(1.08) contrast(1.12) saturate(1.22);
             transition: filter 0.3s ease;
         }
@@ -320,7 +317,7 @@
     <!-- Navbar -->
     <nav class="navbar">
         <div class="logo">VIVERO LAS LOMAS <span>| Vegetación & Riego B2B</span></div>
-        <a href="https://wa.me/525655279896" class="btn-whatsapp-nav">💬 WhatsApp Directo</a>
+        <a href="https://wa.me/521XXXXXXXXXX" id="btn-wa-header" class="btn-whatsapp-nav" target="_blank">💬 WhatsApp Directo</a>
     </nav>
 
     <!-- Hero Section -->
@@ -369,36 +366,36 @@
                 <h3>Solicitar Cotización de Proyecto</h3>
                 <p>Recibe propuesta técnica y comercial en menos de 24 horas.</p>
 
-                <form action="#" method="POST">
+                <form id="cotizacionForm">
                     <div class="form-group">
                         <label>Nombre Completo</label>
-                        <input type="text" placeholder="Ej. Ing. Carlos Mendoza" required>
+                        <input type="text" id="clienteNombre" placeholder="Ej. Ing. Carlos Mendoza" required>
                     </div>
                     <div class="form-group">
                         <label>Empresa / Proyecto</label>
-                        <input type="text" placeholder="Ej. Hotel / Desarrolladora" required>
+                        <input type="text" id="clienteEmpresa" placeholder="Ej. Hotel / Desarrolladora" required>
                     </div>
                     <div class="form-group">
                         <label>Teléfono o WhatsApp</label>
-                        <input type="tel" placeholder="+52 998 ..." required>
+                        <input type="tel" id="clienteTel" placeholder="Ej. 9981234567" required>
                     </div>
                     <div class="form-group">
                         <label>Tipo de Requerimiento</label>
-                        <select required>
+                        <select id="clienteServicio" required>
                             <option value="">Selecciona una opción</option>
-                            <option value="riego_y_plantas">Suministro de Plantas + Sistema de Riego</option>
-                            <option value="solo_plantas">Solo Suministro de plantas por volumen</option>
-                            <option value="solo_riego">Solo Instalación/Diseño de Sistema de Riego</option>
-                            <option value="paisajismo">Proyecto / Renovación Paisajística</option>
+                            <option value="Suministro de Plantas + Sistema de Riego">Suministro de Plantas + Sistema de Riego</option>
+                            <option value="Solo Suministro de plantas por volumen">Solo Suministro de plantas por volumen</option>
+                            <option value="Solo Instalación/Diseño de Riego">Solo Instalación/Diseño de Sistema de Riego</option>
+                            <option value="Proyecto / Renovación Paisajística">Proyecto / Renovación Paisajística</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn-submit">ENVIAR Y COTIZAR</button>
+                    <button type="submit" class="btn-submit">📲 ENVIAR Y COTIZAR</button>
                 </form>
             </div>
         </div>
     </main>
 
-    <!-- Galería con imágenes retocadas por código -->
+    <!-- Galería -->
     <section class="gallery-section">
         <h2>Inventario Real y Variedad en Vivero</h2>
         <p style="color: var(--texto-suave); font-size: 0.95rem;">Contamos con el volumen y la infraestructura lista para abastecer tus obras y proyectos.</p>
@@ -449,6 +446,40 @@
     <footer>
         <p>Vivero Las Lomas &copy; 2026 | Suministro de Vegetación & Sistemas de Riego B2B | www.viverolaslomas.com</p>
     </footer>
+
+    <!-- Lógica de envío directo a WhatsApp -->
+    <script>
+        // 1. CONFIGURA AQUÍ TU NÚMERO DE TELEFONO CON CLAVE DE PAÍS (Sin el signo + ni espacios)
+        // Ejemplo para México: "52" seguido de tus 10 dígitos -> "529981234567"
+        const miTelefonoWhatsApp = "525655279896"; 
+
+        // Actualiza enlace de botón del menú
+        document.getElementById("btn-wa-header").href = "https://wa.me/" + miTelefonoWhatsApp;
+
+        // Escucha el envío del formulario
+        document.getElementById("cotizacionForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Evita recargar la página
+
+            // Captura de datos
+            const nombre = document.getElementById("clienteNombre").value;
+            const empresa = document.getElementById("clienteEmpresa").value;
+            const telefono = document.getElementById("clienteTel").value;
+            const servicio = document.getElementById("clienteServicio").value;
+
+            // Formato del mensaje para WhatsApp
+            const mensaje = `¡Hola! Vengo de la landing page y me gustaría solicitar una cotización B2B.%0A%0A` +
+                            `📌 *Nombre:* ${encodeURIComponent(nombre)}%0A` +
+                            `🏢 *Empresa/Proyecto:* ${encodeURIComponent(empresa)}%0A` +
+                            `📞 *Teléfono:* ${encodeURIComponent(telefono)}%0A` +
+                            `🌱 *Requerimiento:* ${encodeURIComponent(servicio)}`;
+
+            // Enlace final de WhatsApp
+            const urlWhatsApp = `https://wa.me/${miTelefonoWhatsApp}?text=${mensaje}`;
+
+            // Abrir WhatsApp en una nueva pestaña
+            window.open(urlWhatsApp, "_blank");
+        });
+    </script>
 
 </body>
 </html>
